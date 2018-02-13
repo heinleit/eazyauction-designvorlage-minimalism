@@ -1,3 +1,11 @@
+{% assign Sprache = Vorgang.Sprache -%}
+{% assign BilderAnzahl = 0 -%}
+{% for i in (1..12) -%}
+{% assign existiertBild = Vorgang.Bilder.Dateiname.Bild | ExistiertBild: i -%}
+{% if existiertBild -%}
+{% assign BilderAnzahl = BilderAnzahl | Plus: 1 -%}
+{% endif -%}
+{% endfor -%}
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -12,34 +20,25 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        #pimage1:checked ~ .productImagesSliderControls label[for="pimage1"] span,
-        #pimage2:checked ~ .productImagesSliderControls label[for="pimage2"] span,
-        #pimage3:checked ~ .productImagesSliderControls label[for="pimage3"] span,
-        #pimage4:checked ~ .productImagesSliderControls label[for="pimage4"] span {
+        {% for i in (1..BilderAnzahl) -%}
+        #pimage{{i}}:checked ~ .productImagesSliderControls label[for="pimage{{i}}"] span {
             background: #999;
             color: #000000 !important;
         }
 
-        #pimage2:checked ~ .productImageSliderElements {
-            left: -100%;
+        #pimage{{i}}:checked ~ .productImageSliderElements {
+            left: -{{ i | Minus: 1 | Times: 100 }}%;
         }
-
-        #pimage3:checked ~ .productImageSliderElements {
-            left: -200%;
-        }
-
-        #pimage4:checked ~ .productImageSliderElements {
-            left: -300%;
-        }
+        {% endfor -%}
     </style>
 </head>
 <body>
 <nav class="top-bar">
-    <a href="#" title="JTL eazyAuction"><img src="gfx/shoplogo.png" alt="JTL eazyAuction" class="top-bar-title top-bar-icon"></a>
+    <a href="{{ Vorgang.Link.MichSeite }}" target="_blank" title="{{ GlobaleTexte.JTL-Übersetzungen.MichSeite | SelectLanguage: Sprache }}"><img src="gfx/shoplogo.png" alt="{{ GlobaleTexte.JTL-Übersetzungen.MichSeite | SelectLanguage: Sprache }}" class="top-bar-title top-bar-icon"></a>
     <div class="top-bar-left">
         <ul class="menu">
-            <li><a href="#" title="Bewertungen"><i class="fi-star"></i> Bewertungen</a></li>
-            <li><a href="#" title="Weitere Auktionen"><i class="fi-pricetag-multiple"></i> Weitere Auktionen</a></li>
+            <li><a href="{{ Vorgang.Link.EigeneBewertungen }}" target="_blank" title="{{ GlobaleTexte.JTL-Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}"><i class="fi-star"></i> {{ GlobaleTexte.JTL-Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}</a></li>
+            <li><a href="{{ Vorgang.Link.WeitereAuktionen }}" target="_blank" title="{{ GlobaleTexte.JTL-Übersetzungen.Weitere-Auktionen | SelectLanguage: Sprache }}"><i class="fi-pricetag-multiple"></i> {{ GlobaleTexte.JTL-Übersetzungen.Weitere-Auktionen | SelectLanguage: Sprache }}</a></li>
         </ul>
     </div>
     <form class="top-bar-right" action="https://www.ebay.de/sch/i.html" method="get">
@@ -58,7 +57,7 @@
 
     <div class="grid-x">
         <header class="cell margin-bottom-2">
-            <h1 class="separator-left">REGO-FIX 2.1.2 Spannzangen, ER 16 Ø 5.0 mm</h1>
+            <h1 class="separator-left">{{ Vorgang.Artikel.Beschreibung.Artikelname | SelectLanguage: Sprache }}</h1>
         </header>
     </div>
 
@@ -68,47 +67,29 @@
                 <div class="card-section">
                     <div class="productImagesSlider">
 
-                        <!-- Produktbilder steuern -->
-                        <input name="productImagesSlider" id="pimage1" checked="checked" type="radio">
-                        <input name="productImagesSlider" id="pimage2" type="radio">
-                        <input name="productImagesSlider" id="pimage3" type="radio">
-                        <input name="productImagesSlider" id="pimage4" type="radio">
-
+                        {% for i in (1..BilderAnzahl) -%}
+                            <input name="productImagesSlider" id="pimage{{i}}"
+                                   {% if i == 1 -%}
+                                   checked="checked"
+                                    {% endif -%}
+                                   type="radio">
+                        {% endfor -%}
                         <!-- die Produktbilder -->
                         <ul class="productImageSliderElements">
+                            {% for i in (1..BilderAnzahl) -%}
                             <li>
                                 <figure>
-                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
+                                    <div style="background-image: url('{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 480, 480 }}');"></div>
                                 </figure>
                             </li>
-                            <li>
-                                <figure>
-                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
-                                </figure>
-                            </li>
-                            <li>
-                                <figure>
-                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
-                                </figure>
-                            </li>
+                            {% endfor -%}
                         </ul>
 
                         <!-- Einfache Steuerung über pollar -->
                         <ul class="productImagesSliderControls">
-                            <li><label for="pimage1"><span class="primary badge">1</span></label></li>
-                            <li><label for="pimage2"><span class="primary badge">2</span></label></li>
-                            <li><label for="pimage3"><span class="primary badge">3</span></label></li>
-                            <li><label for="pimage4"><span class="primary badge">4</span></label></li>
+                            {% for i in (1..BilderAnzahl) -%}
+                                <li><label for="pimage{{i}}"><span class="primary badge">{{i}}</span></label></li>
+                            {% endfor -%}
                         </ul>
                     </div>
                 </div>
@@ -117,17 +98,18 @@
         <div class="cell medium-6 ">
             <div class="card">
                 <div class="card-section">
-                    <h2 class="separator-left">Kurzbeschreibung</h2>
+                    <!-- Bekomme ich nicht aus den Übersetzungen :( <h2 class="separator-left">Kurzbeschreibung</h2>-->
                     <div>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                        {{ Vorgang.Artikel.Beschreibung.Kurzbeschreibung | SelectLanguage: Sprache }}
                     </div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-section card-price">
-                    <h2 class="separator-left">Preis</h2>
-                    <div class="brutto">24,85 €</div>
-                    <div class="disclaimer"><small>inkl. MwSt., zzgl. Versand</small></div>
+                <div class="card-section">
+                    <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h2>
+                    <div>
+                        {{ GlobaleTexte.JTL-Designvorlagen.Shop-Kategorien | SelectLanguage: Sprache | Render }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,27 +119,19 @@
         <div class="cell">
             <div class="card">
                 <div class="card-section card-price">
-                    <h2 class="separator-left">Beschreibung</h2>
+                    <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Beschreibung | SelectLanguage: Sprache }}</h2>
                     <div class="description">
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-
-                        <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-
-
-                        <ol>
-                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                            <li>Aliquam tincidunt mauris eu risus.</li>
-                        </ol>
-
-                        <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
-
-                        <h3>Header Level 3</h3>
-
-                        <ul>
-                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                            <li>Aliquam tincidunt mauris eu risus.</li>
-                        </ul>
+                        {{ Vorgang.Artikel.Beschreibung.Beschreibung | SelectLanguage: Sprache }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="card">
+                <div class="card-section card-price">
+                    <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h2>
+                    <div class="description">
+                        {{ GlobaleTexte.JTL-Designvorlagen.Hinweis | SelectLanguage: Sprache | Render }}
                     </div>
                 </div>
             </div>
