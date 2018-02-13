@@ -4,10 +4,34 @@
     <meta charset="UTF-8">
     <title>Designvorlage</title>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://static.jtl-software.de/ebay-template/css/styles-jtl-ebay.min.css">
 
+    <style>
+        #pimage1:checked ~ .productImagesSliderControls label[for="pimage1"] span,
+        #pimage2:checked ~ .productImagesSliderControls label[for="pimage2"] span,
+        #pimage3:checked ~ .productImagesSliderControls label[for="pimage3"] span,
+        #pimage4:checked ~ .productImagesSliderControls label[for="pimage4"] span {
+            background: #999;
+            color: #000000 !important;
+        }
+
+        #pimage2:checked ~ .productImageSliderElements {
+            left: -100%;
+        }
+
+        #pimage3:checked ~ .productImageSliderElements {
+            left: -200%;
+        }
+
+        #pimage4:checked ~ .productImageSliderElements {
+            left: -300%;
+        }
+    </style>
 </head>
 <body>
 <nav class="top-bar">
@@ -22,37 +46,36 @@
         <input type="hidden" name="_fsradio" value="%26LH_SpecificSeller%3D1">
         <input type="hidden" name="_saslop" value="1">
         <input type="hidden" name="_sasl" value="heinle-zerspanung_de">
-        <ul class="menu" title="Verkäuferkonto durchsuchen">
-            <li><input id="_nkw" type="search" name="_nkw" placeholder="Verkäufer durchsuchen..."></li>
+        <ul class="menu" title="Angebote durchsuchen">
+            <li><input id="_nkw" type="search" name="_nkw" placeholder="Angebote durchsuchen..."></li>
             <li><button type="button" class="button">Suchen</button></li>
         </ul>
     </form>
     </div>
 </nav>
 
-<div class="grid-container margin-top-3"><!--fluid-->
+<div class="grid-container fluid margin-top-3"><!--fluid-->
 
     <div class="grid-x">
         <header class="cell margin-bottom-2">
-            <h1 class="separator-left">Testprodukt</h1>
+            <h1 class="separator-left">REGO-FIX 2.1.2 Spannzangen, ER 16 Ø 5.0 mm</h1>
         </header>
     </div>
 
-    <div class="grid-x">
+    <div class="grid-x grid-margin-x">
         <div class="cell medium-6 ">
             <div class="card">
                 <div class="card-section">
-                    <!-- zuerst das Sichtfenster -->
-                    <div class="cssSlider">
+                    <div class="productImagesSlider">
 
-                        <!-- die inputs um den Slider zu Steuern -->
-                        <input name="slider" id="slide01" checked="checked" type="radio">
-                        <input name="slider" id="slide02" type="radio">
-                        <input name="slider" id="slide03" type="radio">
-                        <input name="slider" id="slide04" type="radio">
+                        <!-- Produktbilder steuern -->
+                        <input name="productImagesSlider" id="pimage1" checked="checked" type="radio">
+                        <input name="productImagesSlider" id="pimage2" type="radio">
+                        <input name="productImagesSlider" id="pimage3" type="radio">
+                        <input name="productImagesSlider" id="pimage4" type="radio">
 
-                        <!-- die einzelnen Slides, hier als Liste angelegt -->
-                        <ul class="sliderElements">
+                        <!-- die Produktbilder -->
+                        <ul class="productImageSliderElements">
                             <li>
                                 <figure>
                                     <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
@@ -80,18 +103,65 @@
                             </li>
                         </ul>
 
-                        <!-- Eine Steuerung -->
-                        <ul class="sliderControls">
-                            <li><label for="slide01">1</label></li>
-                            <li><label for="slide02">2</label></li>
-                            <li><label for="slide03">3</label></li>
-                            <li><label for="slide04">4</label></li>
+                        <!-- Einfache Steuerung über pollar -->
+                        <ul class="productImagesSliderControls">
+                            <li><label for="pimage1"><span class="primary badge">1</span></label></li>
+                            <li><label for="pimage2"><span class="primary badge">2</span></label></li>
+                            <li><label for="pimage3"><span class="primary badge">3</span></label></li>
+                            <li><label for="pimage4"><span class="primary badge">4</span></label></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="cell medium-6 ">12/12/3 columns</div>
+        <div class="cell medium-6 ">
+            <div class="card">
+                <div class="card-section">
+                    <h2 class="separator-left">Kurzbeschreibung</h2>
+                    <div>
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-section card-price">
+                    <h2 class="separator-left">Preis</h2>
+                    <div class="brutto">24,85 €</div>
+                    <div class="disclaimer"><small>inkl. MwSt., zzgl. Versand</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-x">
+        <div class="cell">
+            <div class="card">
+                <div class="card-section card-price">
+                    <h2 class="separator-left">Beschreibung</h2>
+                    <div class="description">
+                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+
+                        <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+
+                        <ol>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aliquam tincidunt mauris eu risus.</li>
+                        </ol>
+
+                        <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+
+                        <h3>Header Level 3</h3>
+
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aliquam tincidunt mauris eu risus.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

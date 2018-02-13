@@ -20,24 +20,24 @@ header, footer, section, nav, article, aside {
 /**
  * Imageslider
  */
-.sliderElements,
-.sliderElements figure,
-.sliderControls {
+.productImageSliderElements,
+.productImageSliderElements figure,
+.productImagesSliderControls {
     margin: 0;
 }
 
-.sliderElements figure > div,
-.sliderElements figure {
+.productImageSliderElements figure > div,
+.productImageSliderElements figure {
     width: 100%;
 }
 
-.sliderElements figure > div {
+.productImageSliderElements figure > div {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.sliderElements figure > div::before {
+.productImageSliderElements figure > div::before {
     content: '.';
     color: rgba(0,0,0,0);
     display: block;
@@ -46,7 +46,7 @@ header, footer, section, nav, article, aside {
     padding-bottom: 100%;
 }
 
-.sliderElements:after {
+.productImageSliderElements:after {
     content: ".";
     display: block;
     height: .1px;
@@ -56,11 +56,11 @@ header, footer, section, nav, article, aside {
     overflow: hidden;
 }
 
-.cssSlider {
+.productImagesSlider {
     overflow-x: hidden;
 }
 
-.sliderElements {
+.productImageSliderElements {
     list-style: none;
     position: relative;
     left: 0;
@@ -72,17 +72,19 @@ header, footer, section, nav, article, aside {
     -o-transition: left .8s ease-in-out;
     transition: left .8s ease-in-out;
     white-space: nowrap;
+    letter-spacing: -.31em
 }
 
-.sliderElements > li {
+.productImageSliderElements > li {
     /*float: left;*/
     display: inline-block;
     width: 100%;
     position: relative;
+    letter-spacing: normal;
 }
 
 /* Bildunterschrift auf dem Bild positionieren */
-.sliderElements figcaption {
+.productImageSliderElements figcaption {
     display: block;
     color: #fff;
     position: absolute;
@@ -93,66 +95,40 @@ header, footer, section, nav, article, aside {
 }
 
 /* Bilder responsive */
-.sliderElements img {
+.productImageSliderElements img {
     width: 100%;
     height: auto;
 }
 
 
 /* inputs aus dem Blickfeld schieben */
-.cssSlider input {
+.productImagesSlider input {
     position: absolute;
     left: -99999px;
 }
 
 /* mittige Ausrichtung der Controls - funktioniert im Zusammenspiel mit inline-block */
-.sliderControls {
+.productImagesSliderControls {
     text-align: center;
 }
 
 /* Controls nebeneinander bringen */
-.sliderControls li {
+.productImagesSliderControls li {
     display: inline-block;
 }
 
-/* Controls auf einheitliche Maße bringen und die Ecken abrunden */
-.sliderControls label {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    display: block;
-    cursor: pointer;
-    background: #68B022;
-    color: #68B022;
+.productImagesSliderControls label span {
+    width: 2.3em;
+    padding: 0;
+    line-height: 2.6em;
+    height: 2.3em;
+    overflow: hidden;
+    color: #ffffff !important;
 }
 
-/* Attributselektor und indirekter Nachfahrkombinator zum ansteuern der labels */
-.sliderControls label:hover {
+.productImagesSliderControls label:hover span {
     background: #ddd;
-    color: #ddd;
-}
-
-,
-#slide01:checked ~ .sliderControls label[for="slide01"],
-#slide02:checked ~ .sliderControls label[for="slide02"],
-#slide03:checked ~ .sliderControls label[for="slide03"],
-#slide04:checked ~ .sliderControls label[for="slide04"] {
-    background: #ddd;
-    color: #ddd;
-}
-
-#slide02:checked ~ .sliderElements {
-    left: -100%;
-}
-
-#slide03:checked ~ .sliderElements {
-    left: -200%;
-}
-
-#slide04:checked ~ .sliderElements {
-    left: -300%;
+    color: #111111 !important;
 }
 
 /*body {
@@ -177,3 +153,103 @@ img {
     width: 100%;
     max-width: 250px;
 }
+
+/**
+ * Headings
+ */
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+h3 {
+    font-size: 1.6em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h6 {
+    font-size: .9em;
+}
+
+
+
+
+
+
+article.infobox {
+    position: relative;
+}
+
+article.infobox section {
+    position: absolute;
+    display: block;
+    width: 400px;
+    height: 200px;
+    top: 100px;
+    background-color: #c5d2de;
+}
+
+article.infobox section h2 {
+    position: absolute;
+    left: 0;
+    top: -30px;
+    width: 124px;
+    height: 29px;
+    font-family: Verdana;
+    font-size: 15px;
+    margin: 0;
+    background-color: #194b7d;
+    border-radius: 15px 15px 0 0;
+    border: solid #ffffff;
+    border-width: 1px 1px 0 0;
+    z-index: 1;
+}
+
+article.infobox section:nth-child(2) h2 {
+    left: 120px;
+    z-index: 0;
+}
+
+article.infobox section:nth-child(3) h2 {
+    left: 240px;
+    z-index: -1;
+}
+
+article.infobox section h2 a {
+    display: block;
+    margin: 5px 0 0 0;
+    text-align: center;
+    text-decoration: none;
+    color: #c5d2de;
+}
+
+article.infobox section:target, article.infobox section:target h2 {
+    color: #000000;
+    background-color: #c5d2de;
+    z-index: 1;
+}
+
+article.infobox section:target h2 a {
+    color: #194b7d;
+}
+
+article.infobox section p {
+    font-family: Verdana;
+    font-size: 15px;
+    margin: 10px 10px 0 10px;
+}
+
+
+
+
+
