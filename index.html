@@ -1,4 +1,10 @@
 {% assign Sprache = Vorgang.Sprache -%}
+{% assign HinweisText = GlobaleTexte.JTL-Designvorlagen.Hinweis | SelectLanguage: Sprache | Render -%}
+{% assign NackedHinweisText = HinweisText | StringHtml | Trim -%}
+{% assign KategorieText = GlobaleTexte.JTL-Designvorlagen.Shop-Kategorien | SelectLanguage: Sprache | Render -%}
+{% assign NackedKategorieText = KategorieText | StringHtml | Trim -%}
+{% assign Kurzbeschreibung = Vorgang.Artikel.Beschreibung.Kurzbeschreibung | SelectLanguage: Sprache -%}
+{% assign NackedKurzbeschreibung = Kurzbeschreibung | StringHtml | Trim -%}
 {% assign BilderAnzahl = 0 -%}
 {% for i in (1..12) -%}
 {% assign existiertBild = Vorgang.Bilder.Dateiname.Bild | ExistiertBild: i -%}
@@ -17,17 +23,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation-icons/3.0/foundation-icons.min.css">
     <link rel="stylesheet" href="style.css">
 
     <style>
         {% for i in (1..BilderAnzahl) -%}
         #pimage{{i}}:checked ~ .productImagesSliderControls label[for="pimage{{i}}"] span {
-            background: #999;
-            color: #000000 !important;
-        }
+                        background: #999;
+                        color: #000000 !important;
+                    }
 
         #pimage{{i}}:checked ~ .productImageSliderElements {
-            left: -{{ i | Minus: 1 | Times: 100 }}%;
+        left: -{{ i | Minus: 1 | Times: 100 }}%;
         }
         {% endfor -%}
     </style>
@@ -50,7 +57,6 @@
             <li><button type="button" class="button">Suchen</button></li>
         </ul>
     </form>
-    </div>
 </nav>
 
 <div class="grid-container fluid margin-top-3"><!--fluid-->
@@ -68,11 +74,11 @@
                     <div class="productImagesSlider">
 
                         {% for i in (1..BilderAnzahl) -%}
-                            <input name="productImagesSlider" id="pimage{{i}}"
-                                   {% if i == 1 -%}
-                                   checked="checked"
-                                    {% endif -%}
-                                   type="radio">
+                        <input name="productImagesSlider" id="pimage{{i}}"
+                               {% if i == 1 -%}
+                               checked="checked"
+                               {% endif -%}
+                               type="radio">
                         {% endfor -%}
                         <!-- die Produktbilder -->
                         <ul class="productImageSliderElements">
@@ -88,7 +94,7 @@
                         <!-- Einfache Steuerung über pollar -->
                         <ul class="productImagesSliderControls">
                             {% for i in (1..BilderAnzahl) -%}
-                                <li><label for="pimage{{i}}"><span class="primary badge">{{i}}</span></label></li>
+                            <li><label for="pimage{{i}}"><span class="primary badge">{{i}}</span></label></li>
                             {% endfor -%}
                         </ul>
                     </div>
@@ -96,22 +102,26 @@
             </div>
         </div>
         <div class="cell medium-6 ">
+            {% if Kurzbeschreibung != '' -%}
             <div class="card">
                 <div class="card-section">
                     <!-- Bekomme ich nicht aus den Übersetzungen :( <h2 class="separator-left">Kurzbeschreibung</h2>-->
                     <div>
-                        {{ Vorgang.Artikel.Beschreibung.Kurzbeschreibung | SelectLanguage: Sprache }}
+                        {{ Kurzbeschreibung }}
                     </div>
                 </div>
             </div>
+            {% endif -%}
+            {% if NackedKategorieText != '' -%}
             <div class="card">
                 <div class="card-section">
                     <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h2>
                     <div>
-                        {{ GlobaleTexte.JTL-Designvorlagen.Shop-Kategorien | SelectLanguage: Sprache | Render }}
+                        {{ KategorieText }}
                     </div>
                 </div>
             </div>
+            {% endif -%}
         </div>
     </div>
 
@@ -126,16 +136,18 @@
                 </div>
             </div>
         </div>
+        {% if NackedHinweisText != '' -%}
         <div class="cell">
             <div class="card">
                 <div class="card-section card-price">
                     <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h2>
                     <div class="description">
-                        {{ GlobaleTexte.JTL-Designvorlagen.Hinweis | SelectLanguage: Sprache | Render }}
+                        {{ HinweisText }}
                     </div>
                 </div>
             </div>
         </div>
+        {% endif -%}
     </div>
 
 </div>
