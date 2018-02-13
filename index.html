@@ -41,11 +41,11 @@
 </head>
 <body>
 <nav class="top-bar">
-    <a href="{{ Vorgang.Link.MichSeite }}" target="_blank" title="{{ GlobaleTexte.JTL-Übersetzungen.MichSeite | SelectLanguage: Sprache }}"><img src="gfx/shoplogo.png" alt="{{ GlobaleTexte.JTL-Übersetzungen.MichSeite | SelectLanguage: Sprache }}" class="top-bar-title top-bar-icon"></a>
+    <a href="{{ Vorgang.Link.MichSeite }}" target="_blank" title="{{ GlobaleTexte.Übersetzungen.MichSeite | SelectLanguage: Sprache }}"><img src="gfx/shoplogo.png" alt="{{ GlobaleTexte.Übersetzungen.MichSeite | SelectLanguage: Sprache }}" class="top-bar-title top-bar-icon"></a>
     <div class="top-bar-left">
         <ul class="menu">
-            <li><a href="{{ Vorgang.Link.EigeneBewertungen }}" target="_blank" title="{{ GlobaleTexte.JTL-Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}"><i class="fi-star"></i> {{ GlobaleTexte.JTL-Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}</a></li>
-            <li><a href="{{ Vorgang.Link.WeitereAuktionen }}" target="_blank" title="{{ GlobaleTexte.JTL-Übersetzungen.Weitere-Auktionen | SelectLanguage: Sprache }}"><i class="fi-pricetag-multiple"></i> {{ GlobaleTexte.JTL-Übersetzungen.Weitere-Auktionen | SelectLanguage: Sprache }}</a></li>
+            <li><a href="{{ Vorgang.Link.EigeneBewertungen }}" target="_blank" title="{{ GlobaleTexte.Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}"><i class="fi-star"></i> {{ GlobaleTexte.Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}</a></li>
+            <li><a href="{{ Vorgang.Link.WeitereAuktionen }}" target="_blank" title="{{ GlobaleTexte.Übersetzungen.Weitere-Auktionen | SelectLanguage: Sprache }}"><i class="fi-pricetag-multiple"></i> {{ GlobaleTexte.Übersetzungen.Weitere-Auktionen | SelectLanguage: Sprache }}</a></li>
         </ul>
     </div>
     <form class="top-bar-right" action="https://www.ebay.de/sch/i.html" method="get">
@@ -116,7 +116,7 @@
             {% if NackedKategorieText != '' -%}
             <div class="card">
                 <div class="card-section">
-                    <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h2>
+                    <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h2>
                     <div>
                         {{ KategorieText }}
                     </div>
@@ -130,7 +130,7 @@
         <div class="cell">
             <div class="card">
                 <div class="card-section card-price">
-                    <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Beschreibung | SelectLanguage: Sprache }}</h2>
+                    <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Beschreibung | SelectLanguage: Sprache }}</h2>
                     <div class="description">
                         {{ Vorgang.Artikel.Beschreibung.Beschreibung | SelectLanguage: Sprache }}
                     </div>
@@ -141,7 +141,7 @@
         <div class="cell">
             <div class="card">
                 <div class="card-section card-price">
-                    <h2 class="separator-left">{{ GlobaleTexte.JTL-Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h2>
+                    <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h2>
                     <div class="description">
                         {{ HinweisText }}
                     </div>
