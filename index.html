@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Designvorlage</title>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://static.jtl-software.de/ebay-template/css/styles-jtl-ebay.min.css">
+
+</head>
+<body>
+<nav class="top-bar">
+    <a href="#" title="JTL eazyAuction"><img src="gfx/shoplogo.png" alt="JTL eazyAuction" class="top-bar-title top-bar-icon"></a>
+    <div class="top-bar-left">
+        <ul class="menu">
+            <li><a href="#" title="Bewertungen"><i class="fi-star"></i> Bewertungen</a></li>
+            <li><a href="#" title="Weitere Auktionen"><i class="fi-pricetag-multiple"></i> Weitere Auktionen</a></li>
+        </ul>
+    </div>
+    <form class="top-bar-right" action="https://www.ebay.de/sch/i.html" method="get">
+        <input type="hidden" name="_fsradio" value="%26LH_SpecificSeller%3D1">
+        <input type="hidden" name="_saslop" value="1">
+        <input type="hidden" name="_sasl" value="heinle-zerspanung_de">
+        <ul class="menu" title="Verkäuferkonto durchsuchen">
+            <li><input id="_nkw" type="search" name="_nkw" placeholder="Verkäufer durchsuchen..."></li>
+            <li><button type="button" class="button">Suchen</button></li>
+        </ul>
+    </form>
+    </div>
+</nav>
+
+<div class="grid-container margin-top-3"><!--fluid-->
+
+    <div class="grid-x">
+        <header class="cell margin-bottom-2">
+            <h1 class="separator-left">Testprodukt</h1>
+        </header>
+    </div>
+
+    <div class="grid-x">
+        <div class="cell medium-6 ">
+            <div class="card">
+                <div class="card-section">
+                    <!-- zuerst das Sichtfenster -->
+                    <div class="cssSlider">
+
+                        <!-- die inputs um den Slider zu Steuern -->
+                        <input name="slider" id="slide01" checked="checked" type="radio">
+                        <input name="slider" id="slide02" type="radio">
+                        <input name="slider" id="slide03" type="radio">
+                        <input name="slider" id="slide04" type="radio">
+
+                        <!-- die einzelnen Slides, hier als Liste angelegt -->
+                        <ul class="sliderElements">
+                            <li>
+                                <figure>
+                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
+                                </figure>
+                            </li>
+                            <li>
+                                <figure>
+                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
+                                </figure>
+                            </li>
+                            <li>
+                                <figure>
+                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
+                                </figure>
+                            </li>
+                            <li>
+                                <figure>
+                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
+                                </figure>
+                            </li>
+                            <li>
+                                <figure>
+                                    <div style="background-image: url('http://ebene11.com/assets/files/images/eyecatcher/leistungenWebEc.png');"></div>
+                                </figure>
+                            </li>
+                        </ul>
+
+                        <!-- Eine Steuerung -->
+                        <ul class="sliderControls">
+                            <li><label for="slide01">1</label></li>
+                            <li><label for="slide02">2</label></li>
+                            <li><label for="slide03">3</label></li>
+                            <li><label for="slide04">4</label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell medium-6 ">12/12/3 columns</div>
+    </div>
+
+</div>
+
+</body>
+</html>
