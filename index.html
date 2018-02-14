@@ -3,6 +3,7 @@
 {% assign NackedHinweisText = HinweisText | StringHtml | Trim -%}
 {% assign Kurzbeschreibung = Vorgang.Artikel.Beschreibung.Kurzbeschreibung | SelectLanguage: Sprache -%}
 {% assign NackedKurzbeschreibung = Kurzbeschreibung | StringHtml | Trim -%}
+{% assign KategorieAnzahl = Vorgang.ShopKategorien | Size -%}
 {% assign BilderAnzahl = 0 -%}
 {% for i in (1..12) -%}
 {% assign existiertBild = Vorgang.Bilder.Dateiname.Bild | ExistiertBild: i -%}
@@ -134,12 +135,14 @@
                 </p>
             </div>
             <div class="medium-4 cell">
+                {% if KategorieAnzahl > 0 -%}
                 <h4 class="separator-left">{{ GlobaleTexte.Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h4>
                 <div>
                     {% for cat in Vorgang.ShopKategorien %}
                     <a href="{{ Cat.URL }}" target="_blank" class="label">{{ Cat.Name }}</a>&nbsp;
                     {% endfor %}
                 </div>
+                {% if endif -%}
             </div>
             <div class="medium-4 cell">
                 <!--<h4 class="separator-left">Yeti Snowcone</h4>-->
