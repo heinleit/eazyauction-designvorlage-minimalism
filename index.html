@@ -120,33 +120,48 @@
                 </div>
             </div>
         </div>
-        {% if Vorgang.ShopKategorien != empty -%}
-        <div class="card">
-            <div class="card-section">
-                <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h2>
+    </div>
+
+</div>
+
+<footer class="marketing-site-footer">
+    <div class="grid-container fluid medium-unstack">
+        <div class="grid-x grid-margin-x">
+            <div class="medium-4 cell">
+                <h4 class="separator-left">{{ GlobaleTexte.Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h4>
+                <p>
+                    {{ HinweisText }}
+                </p>
+            </div>
+            <div class="medium-4 cell">
+                <h4 class="separator-left">{{ GlobaleTexte.Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h4>
                 <div>
                     {% for cat in Vorgang.ShopKategorien %}
                     <a href="{{ Cat.URL }}" target="_blank" class="label">{{ Cat.Name }}</a>&nbsp;
                     {% endfor %}
                 </div>
             </div>
-        </div>
-        {% endif -%}
-        {% if NackedHinweisText != '' -%}
-        <div class="cell">
-            <div class="card">
-                <div class="card-section card-price">
-                    <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h2>
-                    <div class="description">
-                        {{ HinweisText }}
-                    </div>
-                </div>
+            <div class="medium-4 cell">
+                <!--<h4 class="separator-left">Yeti Snowcone</h4>-->
             </div>
         </div>
-        {% endif -%}
     </div>
+    <div class="marketing-site-footer-bottom grid-container fluid">
+        <div class="grid-x grid-margin-x large-unstack align-middle">
+            <div class="cell medium-4">
+                <p>&copy; 2017 JTL-Software-GmbH</p>
+            </div>
+            <div class="cell medium-8">
+                <ul class="menu marketing-site-footer-bottom-links">
+                    <li><a href="{{ Vorgang.Link.MichSeite }}">{{ GlobaleTexte.Übersetzungen.MichSeite | SelectLanguage: Sprache }}</a></li>
+                    <li><a href="{{ Vorgang.Link.EigeneBewertungen }}">{{ GlobaleTexte.Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}</a></li>
+                    <li><a href="{{ Vorgang.Link.WeitereAuktionen }}">{{ GlobaleTexte.Übersetzungen.Weitere_Auktionen | SelectLanguage: Sprache }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
-</div>
 
 </body>
 </html>
