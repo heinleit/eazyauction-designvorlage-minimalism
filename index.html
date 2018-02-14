@@ -25,19 +25,6 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation-icons/3.0/foundation-icons.min.css">
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        {% for i in (1..BilderAnzahl) -%}
-        #pimage{{i}}:checked ~ .productImagesSliderControls label[for="pimage{{i}}"] span {
-                        background: #999;
-                        color: #000000 !important;
-                    }
-
-        #pimage{{i}}:checked ~ .productImageSliderElements {
-        left: -{{ i | Minus: 1 | Times: 100 }}%;
-        }
-        {% endfor -%}
-    </style>
 </head>
 <body>
 <nav class="top-bar">
@@ -62,33 +49,9 @@
         <div class="cell medium-6 ">
             <div class="card">
                 <div class="card-section">
-                    <div class="productImagesSlider">
-
-                        {% for i in (1..BilderAnzahl) -%}
-                        <input name="productImagesSlider" id="pimage{{i}}"
-                               {% if i == 1 -%}
-                               checked="checked"
-                               {% endif -%}
-                               type="radio">
-                        {% endfor -%}
-                        <!-- die Produktbilder -->
-                        <ul class="productImageSliderElements">
-                            {% for i in (1..BilderAnzahl) -%}
-                            <li>
-                                <figure>
-                                    <div style="background-image: url('{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 480, 480 }}');"></div>
-                                </figure>
-                            </li>
-                            {% endfor -%}
-                        </ul>
-
-                        <!-- Einfache Steuerung über pollar -->
-                        <ul class="productImagesSliderControls">
-                            {% for i in (1..BilderAnzahl) -%}
-                            <li><label for="pimage{{i}}"><span class="primary badge">{{i}}</span></label></li>
-                            {% endfor -%}
-                        </ul>
-                    </div>
+                    {% for i in (1..BilderAnzahl) -%}
+                    <a href="{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 150, 150 }}" target="_blank" class="thumbnail"><img src="{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 480, 480 }}" alt="{{ Vorgang.Artikel.Beschreibung.Artikelname | SelectLanguage: Sprache }}"></a>
+                    {% endfor -%}
                 </div>
             </div>
         </div>
