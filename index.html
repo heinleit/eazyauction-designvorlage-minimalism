@@ -1,10 +1,9 @@
 {% assign Sprache = Vorgang.Sprache -%}
 {% assign HinweisText = GlobaleTexte.JTL-Designvorlagen.Hinweis | SelectLanguage: Sprache | Render -%}
 {% assign NackedHinweisText = HinweisText | StringHtml | Trim -%}
-{% assign KategorieText = GlobaleTexte.JTL-Designvorlagen.Shop-Kategorien | SelectLanguage: Sprache | Render -%}
-{% assign NackedKategorieText = KategorieText | StringHtml | Trim -%}
 {% assign Kurzbeschreibung = Vorgang.Artikel.Beschreibung.Kurzbeschreibung | SelectLanguage: Sprache -%}
 {% assign NackedKurzbeschreibung = Kurzbeschreibung | StringHtml | Trim -%}
+{% assign KategorieAnzahl = Vorgang.ShopKategorien | Size -%}
 {% assign BilderAnzahl = 0 -%}
 {% for i in (1..12) -%}
 {% assign existiertBild = Vorgang.Bilder.Dateiname.Bild | ExistiertBild: i -%}
@@ -25,19 +24,6 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation-icons/3.0/foundation-icons.min.css">
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        {% for i in (1..BilderAnzahl) -%}
-        #pimage{{i}}:checked ~ .productImagesSliderControls label[for="pimage{{i}}"] span {
-                        background: #999;
-                        color: #000000 !important;
-                    }
-
-        #pimage{{i}}:checked ~ .productImageSliderElements {
-        left: -{{ i | Minus: 1 | Times: 100 }}%;
-        }
-        {% endfor -%}
-    </style>
 </head>
 <body>
 <nav class="top-bar">
@@ -62,33 +48,10 @@
         <div class="cell medium-6 ">
             <div class="card">
                 <div class="card-section">
-                    <div class="productImagesSlider">
-
-                        {% for i in (1..BilderAnzahl) -%}
-                        <input name="productImagesSlider" id="pimage{{i}}"
-                               {% if i == 1 -%}
-                               checked="checked"
-                               {% endif -%}
-                               type="radio">
-                        {% endfor -%}
-                        <!-- die Produktbilder -->
-                        <ul class="productImageSliderElements">
-                            {% for i in (1..BilderAnzahl) -%}
-                            <li>
-                                <figure>
-                                    <div style="background-image: url('{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 480, 480 }}');"></div>
-                                </figure>
-                            </li>
-                            {% endfor -%}
-                        </ul>
-
-                        <!-- Einfache Steuerung über pollar -->
-                        <ul class="productImagesSliderControls">
-                            {% for i in (1..BilderAnzahl) -%}
-                            <li><label for="pimage{{i}}"><span class="primary badge">{{i}}</span></label></li>
-                            {% endfor -%}
-                        </ul>
-                    </div>
+                    <h2 class="separator-left">Bilder</h2>
+                    {% for i in (1..BilderAnzahl) -%}
+                    <a href="{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | PictureSize: 0, 0 }}" target="_blank" class="thumbnail thumbnail-square-150" style="background-image: url('{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 150, 150 }}')"></a>&nbsp;&nbsp;
+                    {% endfor -%}
                 </div>
             </div>
         </div>
@@ -97,27 +60,57 @@
             {% if NackedKurzbeschreibung != '' -%}
             <div class="card">
                 <div class="card-section">
-                    <!-- Bekomme ich nicht aus den Übersetzungen :( <h2 class="separator-left">Kurzbeschreibung</h2>-->
+                    <h2 class="separator-left">Kurzbeschreibung</h2>
                     <div>
                         {{ Kurzbeschreibung }}
                     </div>
                 </div>
             </div>
             {% endif -%}
-            {% if NackedKategorieText != '' -%}
-            <div class="card">
+            <!--<div class="card">
                 <div class="card-section">
-                    <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h2>
-                    <div>
-                        {{ KategorieText }}
-                    </div>
                 </div>
-            </div>
-            {% endif -%}
+            </div>-->
+
+            <h2 class="separator-left">Merkmale</h2>
+            <ul class="pricing-table">
+                {% assign Sprache = 'Deutsch' %}
+                {% assign ArtNrSku = Vorgang.Artikel.Allgemein.Stammdaten.ArtNrSku -%}
+                {% assign ArtNrSkuIsFilled = ArtNrSku | IsFilled -%}
+                {% if ArtNrSkuIsFilled -%}
+                <li><strong>{{ GlobaleTexte.Übersetzungen.Artikelnummer | SelectLanguage: Sprache }}:</strong> {{ ArtNrSku }}</li>
+                {% endif -%}
+                {% comment %} Block Ende {% endcomment %}
+                {% assign EAN = Vorgang.Artikel.Allgemein.Stammdaten.EAN -%}
+                {% assign EANIsFilled = EAN | IsFilled -%}
+                {% if EANIsFilled -%}
+                <li><strong>{{ GlobaleTexte.Übersetzungen.EAN | SelectLanguage: Sprache }}:</strong> {{ EAN }} </li>
+                {% endif -%}
+                {% assign Versandgewicht = Vorgang.Artikel.Allgemein.Maße_Gewicht.Versandgewicht -%}
+                {% assign VersandgewichtIsFilled = Versandgewicht | IsFilled -%}
+                {% if VersandgewichtIsFilled -%}
+                <li><strong>{{ GlobaleTexte.Übersetzungen.Gewicht | SelectLanguage: Sprache }}:</strong> {{ Versandgewicht }} kg </li>
+                {% endif -%}
+                {% assign ISBN = Vorgang.Artikel.Sonstiges.ISBN -%}
+                {% assign ISBNIsFilled = ISBN | IsFilled -%}
+                {% if ISBNIsFilled -%}
+                <li><strong>{{ GlobaleTexte.Übersetzungen.ISBN | SelectLanguage: Sprache }}:</strong> {{ ISBN }} </li>
+                {% endif -%}
+                {% assign Hersteller = Vorgang.Artikel.Allgemein.Stammdaten.Hersteller.Name -%}
+                {% assign HerstellerIsFilled = Hersteller | IsFilled -%}
+                {% if HerstellerIsFilled -%}
+                <li><strong>{{ GlobaleTexte.Übersetzungen.Hersteller | SelectLanguage: Sprache }}:</strong> {{ Hersteller }} </li>
+                {% endif -%}
+                {% for EbayMerkmal in Vorgang.eBayMerkmale -%}
+                {% if EbayMerkmal.Name != 'Anzahl der Einheiten' and EbayMerkmal.Name != 'Maßeinheit' %}
+                <li><strong>{{ EbayMerkmal.Name }}:</strong> {{ EbayMerkmal.Wert }} </li>
+                {% endif %}
+                {% endfor -%}
+            </ul>
         </div>
     </div>
 
-    <div class="grid-x">
+    <div class="grid-x margin-top-2">
         <div class="cell">
             <div class="card">
                 <div class="card-section card-price">
@@ -128,21 +121,50 @@
                 </div>
             </div>
         </div>
-        {% if NackedHinweisText != '' -%}
-        <div class="cell">
-            <div class="card">
-                <div class="card-section card-price">
-                    <h2 class="separator-left">{{ GlobaleTexte.Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h2>
-                    <div class="description">
-                        {{ HinweisText }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endif -%}
     </div>
 
 </div>
+
+<footer class="marketing-site-footer">
+    <div class="grid-container fluid medium-unstack">
+        <div class="grid-x grid-margin-x">
+            <div class="medium-4 cell">
+                <h4 class="separator-left">{{ GlobaleTexte.Übersetzungen.Hinweis | SelectLanguage: Sprache }}</h4>
+                <p>
+                    {{ HinweisText }}
+                </p>
+            </div>
+            <div class="medium-4 cell">
+                {% if KategorieAnzahl > 0 -%}
+                <h4 class="separator-left">{{ GlobaleTexte.Übersetzungen.Kategorien | SelectLanguage: Sprache }}</h4>
+                <div>
+                    {% for cat in Vorgang.ShopKategorien %}
+                    <a href="{{ Cat.URL }}" target="_blank" class="label">{{ Cat.Name }}</a>&nbsp;
+                    {% endfor %}
+                </div>
+                {% if endif -%}
+            </div>
+            <div class="medium-4 cell">
+                <!--<h4 class="separator-left">Yeti Snowcone</h4>-->
+            </div>
+        </div>
+    </div>
+    <div class="marketing-site-footer-bottom grid-container fluid">
+        <div class="grid-x grid-margin-x large-unstack align-middle">
+            <div class="cell medium-4">
+                <p>&copy; 2017 JTL-Software-GmbH</p>
+            </div>
+            <div class="cell medium-8">
+                <ul class="menu marketing-site-footer-bottom-links">
+                    <li><a href="{{ Vorgang.Link.MichSeite }}">{{ GlobaleTexte.Übersetzungen.MichSeite | SelectLanguage: Sprache }}</a></li>
+                    <li><a href="{{ Vorgang.Link.EigeneBewertungen }}">{{ GlobaleTexte.Übersetzungen.Bewertungsprofil | SelectLanguage: Sprache }}</a></li>
+                    <li><a href="{{ Vorgang.Link.WeitereAuktionen }}">{{ GlobaleTexte.Übersetzungen.Weitere_Auktionen | SelectLanguage: Sprache }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
 
 </body>
 </html>
