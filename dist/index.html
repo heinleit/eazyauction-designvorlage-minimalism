@@ -47,7 +47,7 @@
     <div class="grid-x grid-margin-x">
         <div class="cell medium-6 ">
             <div class="card">
-                <div class="card-section">
+                <div class="card-section images-card-section">
                     <h2 class="separator-left">Bilder</h2>
                     {% for i in (1..BilderAnzahl) -%}
                     <a href="{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | PictureSize: 0, 0 }}" target="_blank" class="thumbnail thumbnail-square-150" style="background-image: url('{{ Vorgang.Bilder.Dateiname.Bild | Bild: i | Groesse: 150, 150 }}')"></a>&nbsp;&nbsp;
@@ -152,7 +152,7 @@
     <div class="marketing-site-footer-bottom grid-container fluid">
         <div class="grid-x grid-margin-x large-unstack align-middle">
             <div class="cell medium-4">
-                <p>minimalism Designvorlage<br>&copy; 2017 Hendrik Heinle IT-Systeme </p>
+                <p><small>minimalism Designvorlage<br>&copy; 2017 Hendrik Heinle IT-Systeme</small></p>
             </div>
             <div class="cell medium-8">
                 <ul class="menu marketing-site-footer-bottom-links">
